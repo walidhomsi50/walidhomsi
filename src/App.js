@@ -4,14 +4,15 @@ import bodyIcon from "./assets/icons/icons8-body-mass-index-64.png";
 import bmiIcon from "./assets/icons/icons8-bmi-48.png";
 
 function App() {
-  const initialCount=0;
+  const initialCount = 0;
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [total, setTotal] = useState(initialCount);
   const [category, setCategory] = useState(initialCount);
+
   const calculateBmi = () => {
     setTotal(weight / (height * height));
-    if (total < 18.5) {
+    if (total < 18.5 && total > 0) {
       setCategory("underweight");
     } else if (total >= 18.5 && total < 24.9) {
       setCategory("normal weight");
@@ -34,7 +35,6 @@ function App() {
     setHeight(initialCount);
     setTotal(initialCount);
     setCategory(initialCount);
-    
   };
 
   return (
@@ -54,7 +54,7 @@ function App() {
           value={weight}
           onChange={(e) => setWeight(+e.target.value)}
         />
-         
+
         <input
           placeholder="height (m)"
           type="number"

@@ -1,3 +1,9 @@
+.main-page{
+    padding:20px 0px;
+}
+
+
+
 .main-page h2{
  padding: 10px;
 }
@@ -18,12 +24,15 @@
 	right: 0;
 	left: 0;
 	bottom: 0;
-	height: 500px;
 	margin: auto;
 	box-shadow: 2px 2px 11px -2px gray;
 	background-color: aliceblue;
 	text-align: center;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+
 
 .calculator-container h2{
 
@@ -55,6 +64,7 @@
 	margin: auto;
 	display: block;
 	margin-top: 30px;
+    margin-bottom: 20px;
 	
 }
 .calculator-container strong {
