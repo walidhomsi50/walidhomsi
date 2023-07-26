@@ -1,40 +1,78 @@
-import Expenses from './components/Expenses';
-import NewExpense from './components/NewExpense';
+import React, { useState } from "react";
+import "./App.css";
+import bodyIcon from "./assets/icons/icons8-body-mass-index-64.png";
+import bmiIcon from "./assets/icons/icons8-bmi-48.png";
 
 function App() {
-  const expenses = [
-    {
-      id: 'e1',
-      title: 'Toilet Paper',
-      amount: 94.12,
-      date: new Date(2020, 7, 14),
-    },
-    { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
-    {
-      id: 'e3',
-      title: 'Car Insurance',
-      amount: 294.67,
-      date: new Date(2021, 2, 28),
-    },
-    {
-      id: 'e4',
-      title: 'New Desk (Wooden)',
-      amount: 450,
-      date: new Date(2021, 5, 12),
-    },
-  ];
-  const addExpenseHandler=expense=>{
-    console.log('in app.js')
-    console.log(expense);
+  const initialCount=0;
+  const [weight, setWeight] = useState();
+  const [height, setHeight] = useState();
+  const [total, setTotal] = useState(initialCount);
+  const [category, setCategory] = useState(initialCount);
+  const calculateBmi = () => {
+    setTotal(weight / (height * height));
+    if (total < 18.5) {
+      setCategory("underweight");
+    } else if (total >= 18.5 && total < 24.9) {
+      setCategory("normal weight");
+    } else if (total >= 25 && total < 29.9) {
+      setCategory("overweight");
+    } else if (total >= 30) {
+      setCategory("obese");
+    }
+  };
+  const handleInput = () => {
+    if (weight > 0 && height > 0) {
+      calculateBmi();
+    } else {
+      alert("Please Provide Valid inputs!");
+    }
+  };
 
-  }
+  const onCancelClick = () => {
+    setWeight(initialCount);
+    setHeight(initialCount);
+    setTotal(initialCount);
+    setCategory(initialCount);
+    
+  };
 
   return (
-    <div>
-      <NewExpense onAddExpense={addExpenseHandler}/>
-      <Expenses items={expenses} />
-    </div>
+    <>
+      <div className=" main-page">
+        <h2>Body Mass Index</h2>
+        <div className="image-icon">
+          <img src={bodyIcon} alt="bodyicon"></img>
+        </div>
+      </div>
+      <div className="calculator-container">
+        <h2>Calculate Your BMI</h2>
+        <p>Please Provide weight in(Kg) and height in(m)</p>
+        <input
+          placeholder=" weight (kg)"
+          type="number"
+          value={weight}
+          onChange={(e) => setWeight(+e.target.value)}
+        />
+         
+        <input
+          placeholder="height (m)"
+          type="number"
+          value={height}
+          onChange={(e) => setHeight(+e.target.value)}
+        />
+
+        <button onClick={handleInput}>Calculate</button>
+
+        <button onClick={onCancelClick}>Cancel</button>
+
+        <strong>BMI:{total}</strong>
+        <strong>Category:{category}</strong>
+        <span className="bmi-icon">
+          <img src={bmiIcon} alt="bmi-icon"></img>
+        </span>
+      </div>
+    </>
   );
 }
-
 export default App;
